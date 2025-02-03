@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <title>Eliminar Tarea</title>
+    <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" href="../static/css/styles.css"
+        th:href="@{/css/styles.css}">
+</head>
+<body>
+<div class="container mt-4">
+    <h1>Eliminar Tarea</h1>
+    <p>¿Estás seguro de que deseas eliminar esta tarea?</p>
+    <form th:action="@{/tareas/eliminar/{id}(id=${tarea.id})}" method="post">
+        <button type="submit" class="btn btn-danger">Eliminar</button>
+        <a href="/tareas" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+</body>
+</html>

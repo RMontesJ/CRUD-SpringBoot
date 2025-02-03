@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <title>Ver Proyecto</title>
+    <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" href="../static/css/styles.css"
+        th:href="@{/css/styles.css}">
+</head>
+<body>
+<div class="container mt-4">
+    <h1>Detalles del Proyecto</h1>
+
+    <!-- Mostrar los detalles del proyecto -->
+    <div class="mb-3">
+        <label for="nombre" class="form-label">Nombre del Proyecto</label>
+        <input type="text" id="nombre" th:field="*{nombre}" class="form-control" disabled>
+    </div>
+    <div class="mb-3">
+        <label for="descripcion" class="form-label">Descripción</label>
+        <textarea id="descripcion" th:field="*{descripcion}" class="form-control" disabled></textarea>
+    </div>
+    <div class="mb-3">
+        <label for="fecha_inicio" class="form-label">Fecha de Inicio</label>
+        <input type="date" id="fecha_inicio" th:field="*{fecha_inicio}" class="form-control" disabled>
+    </div>
+    <div class="mb-3">
+        <label for="estado" class="form-label">Estado</label>
+        <select id="estado" th:field="*{estado}" class="form-control" disabled>
+            <option value="Activo" th:selected="*{estado == 'Activo'}">Activo</option>
+            <option value="En Progreso" th:selected="*{estado == 'En Progreso'}">En Progreso</option>
+            <option value="Finalizado" th:selected="*{estado == 'Finalizado'}">Finalizado</option>
+        </select>
+    </div>
+
+    <!-- Botones de navegación -->
+    <a href="/proyectos" class="btn btn-secondary">Volver a la lista de proyectos</a>
+</div>
+</body>
+</html>
