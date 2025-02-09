@@ -12,26 +12,24 @@
 <body>
 <div class="container mt-4">
     <h1>Lista de Personas</h1>
-    <a href="/personas/crear" class="btn btn-primary mb-3">Crear Persona</a>
+    <a href="/usuario/crear" class="btn btn-primary mb-3">Crear Persona</a>
     <table class="table table-striped">
         <thead>
         <tr>
+			
             <th>ID</th>
             <th>Nombre</th>
-            <th>Apellidos</th>
-            <th>Email</th>
-            <th>Acciones</th>
+            <th>Role</th>
+           
         </tr>
         </thead>
         <tbody>
-        <tr th:each="persona : ${personas}">
-            <td th:text="${persona.id}"></td>
-            <td th:text="${persona.nombre}"></td>
-            <td th:text="${persona.apellidos}"></td>
-            <td th:text="${persona.email}"></td>
+        <tr th:each="persona : ${usuarios}">
+            <td th:text="${usuario.id}"></td>
+            <td th:text="${usuario.username}"></td>
             <td>
-                <a th:href="@{/personas/editar/{id}(id=${persona.id})}" class="btn btn-warning">Editar</a>
-                <a th:href="@{/personas/eliminar/{id}(id=${persona.id})}" class="btn btn-danger"
+                <a th:href="@{/usuario/editar/{id}(id=${usuario.id})}" class="btn btn-warning">Editar</a>
+                <a th:href="@{/usuario/eliminar/{id}(id=${usuario.id})}" class="btn btn-danger"
                    onclick="return confirm('¿Estás seguro de que quieres eliminar esta persona?');">Eliminar</a>
             </td>
         </tr>
