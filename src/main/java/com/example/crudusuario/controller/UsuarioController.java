@@ -21,10 +21,10 @@ public class UsuarioController {
         return "index";
     }
 
-    @GetMapping("/crear")
+    @GetMapping("/user/crear")
     public String crearForm(Model model) {
         model.addAttribute("persona", new Usuario());
-        return "crear";
+        return "/usuario/crear";
     }
 
     @PostMapping

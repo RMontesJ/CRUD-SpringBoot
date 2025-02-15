@@ -12,22 +12,34 @@
 <body>
 <div class="container mt-4">
     <h1>Detalles de la Tarea</h1>
-    <div class="mb-3">
-        <label class="form-label"><strong>Título:</strong></label>
-        <p th:text="${tarea.titulo}" class="form-control-static"></p>
-    </div>
-    <div class="mb-3">
-        <label class="form-label"><strong>Descripción:</strong></label>
-        <p th:text="${tarea.descripcion}" class="form-control-static"></p>
-    </div>
-    <div class="mb-3">
-        <label class="form-label"><strong>Fecha Límite:</strong></label>
-        <p th:text="${tarea.fecha_limite}" class="form-control-static"></p>
-    </div>
-    <div class="mb-3">
-        <label class="form-label"><strong>Estado:</strong></label>
-        <p th:text="${tarea.estado}" class="form-control-static"></p>
-    </div>
+	<table class="table table-striped">
+	    <thead>
+	        <tr>
+	            <th>ID</th>
+	            <th>Título</th>
+	            <th>Descripción</th>
+	            <th>Fecha Límite</th>
+	            <th>Estado</th>
+	            <th>Acciones</th>
+	        </tr>
+	    </thead>
+	    <tbody>
+	        <tr th:each="tarea : ${tareas}">
+	            <td th:text="${tarea.id}"></td>
+	            <td th:text="${tarea.titulo}"></td>
+	            <td th:text="${tarea.descripcion}"></td>
+	            <td th:text="${tarea.fecha_limite}"></td>
+	            <td th:text="${tarea.estado}"></td>
+	            <td>
+	                <a th:href="@{/tarea/editar/{id}(id=${tarea.id})}" class="btn btn-warning">Editar</a>
+	                <a th:href="@{/tarea/crear/}" class="btn btn-warning">Crear</a>
+	                <a th:href="@{/tarea/eliminar/{id}(id=${tarea.id})}" class="btn btn-danger"
+	                   onclick="return confirm('¿Estás seguro de que quieres eliminar esta tarea?');">Eliminar</a>
+	            </td>
+	        </tr>
+	    </tbody>
+	</table>
+
     <a href="/tareas" class="btn btn-primary">Volver</a>
 </div>
 </body>

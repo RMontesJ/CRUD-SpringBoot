@@ -13,27 +13,34 @@
 <div class="container mt-4">
     <h1>Detalles del Proyecto</h1>
 
-    <!-- Mostrar los detalles del proyecto -->
-    <div class="mb-3">
-        <label for="nombre" class="form-label">Nombre del Proyecto</label>
-        <input type="text" id="nombre" th:field="*{nombre}" class="form-control" disabled>
-    </div>
-    <div class="mb-3">
-        <label for="descripcion" class="form-label">Descripción</label>
-        <textarea id="descripcion" th:field="*{descripcion}" class="form-control" disabled></textarea>
-    </div>
-    <div class="mb-3">
-        <label for="fecha_inicio" class="form-label">Fecha de Inicio</label>
-        <input type="date" id="fecha_inicio" th:field="*{fecha_inicio}" class="form-control" disabled>
-    </div>
-    <div class="mb-3">
-        <label for="estado" class="form-label">Estado</label>
-        <select id="estado" th:field="*{estado}" class="form-control" disabled>
-            <option value="Activo" th:selected="*{estado == 'Activo'}">Activo</option>
-            <option value="En Progreso" th:selected="*{estado == 'En Progreso'}">En Progreso</option>
-            <option value="Finalizado" th:selected="*{estado == 'Finalizado'}">Finalizado</option>
-        </select>
-    </div>
+	<table class="table table-striped">
+	    <thead>
+	        <tr>
+	            <th>ID</th>
+	            <th>Nombre</th>
+	            <th>Descripción</th>
+	            <th>Fecha de Inicio</th>
+	            <th>Estado</th>
+	        
+	        </tr>
+	    </thead>
+	    <tbody>
+	        <tr th:each="proyecto : ${proyectos}">
+	            <td th:text="${proyecto.id}"></td>
+	            <td th:text="${proyecto.nombre}"></td>
+	            <td th:text="${proyecto.descripcion}"></td>
+	            <td th:text="${proyecto.fecha_inicio}"></td>
+	            <td th:text="${proyecto.estado}"></td>
+	            <td>
+	                <a th:href="@{/proyecto/editar/{id}(id=${proyecto.id})}" class="btn btn-warning">Editar</a>
+					<a th:href="@{/proyecto/crear/}" class="btn btn-warning">Crear</a>
+	                <a th:href="@{/proyecto/eliminar/{id}(id=${proyecto.id})}" class="btn btn-danger"
+	                   onclick="return confirm('¿Estás seguro de que quieres eliminar este proyecto?');">Eliminar</a>
+	            </td>
+	        </tr>
+	    </tbody>
+	</table>
+
 
     <!-- Botones de navegación -->
     <a href="/proyectos" class="btn btn-secondary">Volver a la lista de proyectos</a>

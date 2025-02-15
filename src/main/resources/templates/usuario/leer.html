@@ -11,19 +11,30 @@
 </head>
 <body>
 <div class="container mt-4">
-    <h1>Detalles del Usuario</h1>
-    <div class="mb-3">
-        <label class="form-label"><strong>ID:</strong></label>
-        <p th:text="${persona.id}" class="form-control-static"></p>
-    </div>
-    <div class="mb-3">
-        <label class="form-label"><strong>Username:</strong></label>
-        <p th:text="${persona.username}" class="form-control-static"></p>
-    </div>
-    <div class="mb-3">
-        <label class="form-label"><strong>Role:</strong></label>
-        <p th:text="${persona.role}" class="form-control-static"></p>
-    </div>
+	<table class="table table-striped">
+	    <thead>
+	        <tr>
+	            <th>ID</th>
+	            <th>Nombre de Usuario</th>
+	            <th>Rol</th>
+	            <th>Acciones</th>
+	        </tr>
+	    </thead>
+	    <tbody>
+	        <tr th:each="usuario : ${usuarios}">
+	            <td th:text="${usuario.id}"></td>
+	            <td th:text="${usuario.username}"></td>
+	            <td th:text="${usuario.role}"></td>
+	            <td>
+	                <a th:href="@{/usuario/editar/{id}(id=${usuario.id})}" class="btn btn-warning">Editar</a>
+					<a th:href="@{/usuario/editar/}" class="btn btn-warning">Editar</a>
+	                <a th:href="@{/usuario/eliminar/{id}(id=${usuario.id})}" class="btn btn-danger"
+	                   onclick="return confirm('¿Estás seguro de que quieres eliminar este usuario?');">Eliminar</a>
+	            </td>
+	        </tr>
+	    </tbody>
+	</table>
+
     <a href="/personas" class="btn btn-primary">Volver</a>
 </div>
 </body>
