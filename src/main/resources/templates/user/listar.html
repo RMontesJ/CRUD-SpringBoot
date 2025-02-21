@@ -11,7 +11,7 @@
     <div th:replace="~{layout/navbar :: navbar}"></div>
     <div class="container mt-4">
         <h1 class="mb-4">Lista de Personas</h1>
-        <a th:href="@{/admin/personas/crear}" class="btn btn-success mb-3">Añadir Persona</a>
+        <a th:href="@{/user/crear}" class="btn btn-success mb-3">Crear Persona</a>
         
         <table class="table table-bordered table-striped">
             <thead class="table-dark">
@@ -23,14 +23,14 @@
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="persona : ${personas}">
-                    <td th:text="${persona.id}"></td>
-                    <td th:text="${persona.username}"></td>
-                    <td th:text="${persona.role}"></td>
+                <tr th:each="usuario : ${usuarios}">
+                    <td th:text="${usuario.id}"></td>
+                    <td th:text="${usuario.username}"></td>
+                    <td th:text="${usuario.role}"></td>
                     <td>
-                        <a th:href="@{/admin/personas/editar/{id}(id=${persona.id})}" 
+                        <a th:href="@{/admin/user/editar/{id}(id=${usuario.id})}" 
                            class="btn btn-warning">Editar</a>
-                        <a th:href="@{/admin/personas/eliminar/{id}(id=${persona.id})}" 
+                        <a th:href="@{/admin/user/eliminar/{id}(id=${usuario.id})}" 
                            class="btn btn-danger"
                            onclick="return confirm('¿Estás seguro de eliminar esta persona?');">
                            Eliminar

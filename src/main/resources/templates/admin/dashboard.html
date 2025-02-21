@@ -11,9 +11,8 @@
     <div th:replace="~{layout/navbar :: navbar}"></div>
 	<h1>Bienvenido, Administrador</h1>
 	<p>Este es tu panel de administración.</p>
-	<a href="/user/personas" class="btn btn-primary">Gestionar Personas</a>
-	<a href="/registro" class="btn btn-primary">Gestionar Usuarios</a>
-	<a href="/home" class="btn btn-primary">Home user</a>
+	<a href="/user/listar" class="btn btn-primary">Gestionar Usuarios</a>
+	<a href="/user/home" class="btn btn-primary">Home user</a>
 	<form th:action="@{/logout}" method="post">
 		<button type="submit" class="btn btn-danger">Cerrar Sesión</button>
 	</form>

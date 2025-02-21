@@ -8,7 +8,6 @@ import com.example.crudusuario.service.UsuarioService;
 import java.util.List;
 
 @Controller
-@RequestMapping("/usuarios")
 public class UsuarioController {
     private final UsuarioService usuarioService;
 
@@ -25,10 +24,10 @@ public class UsuarioController {
     @PostMapping("/registro")
     public String registrarUsuario(@ModelAttribute Usuario usuario) {
         usuarioService.registrarUsuario(usuario);
-        return "redirect:/usuarios/listar";
+        return "redirect:/user/listar";
     }
 
-    @GetMapping("/listar")
+    @GetMapping("/user/listar")
     public String listarUsuarios(Model model) {
         List<Usuario> usuarios = usuarioService.obtenerTodosLosUsuarios();
         model.addAttribute("usuarios", usuarios);
@@ -38,13 +37,13 @@ public class UsuarioController {
     @PostMapping("/actualizar/{id}")
     public String actualizarUsuario(@PathVariable Long id, @ModelAttribute Usuario usuario) {
         usuarioService.actualizarUsuario(id, usuario);
-        return "redirect:/usuarios/listar";
+        return "redirect:/user/listar";
     }
 
     @GetMapping("/eliminar/{id}")
     public String eliminarUsuario(@PathVariable Long id) {
         usuarioService.eliminarUsuario(id);
-        return "redirect:/usuarios/listar";
+        return "redirect:/user/listar";
     }
 
     @GetMapping("/home")

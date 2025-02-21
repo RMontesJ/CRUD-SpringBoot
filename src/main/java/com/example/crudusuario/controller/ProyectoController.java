@@ -5,13 +5,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.crudusuario.model.Proyecto;
+import com.example.crudusuario.model.Usuario;
 import com.example.crudusuario.repository.ProyectoRepository;
+import com.example.crudusuario.service.ProyectoService;
 
 @Controller
 @RequestMapping("/proyectos")
 public class ProyectoController {
 
     private final ProyectoRepository proyectoRepository;
+    private ProyectoService proyectoService;
 
     public ProyectoController(ProyectoRepository proyectoRepository) {
         this.proyectoRepository = proyectoRepository;
@@ -41,16 +44,12 @@ public class ProyectoController {
         return "proyecto/editar";
     }
 
-    @PostMapping("/actualizar/{id}")
-    public String actualizar(@PathVariable Long id, @ModelAttribute Proyecto proyecto) {
-        // Asegurar que el objeto Proyecto tiene el ID correcto
-        proyecto.setId(id);
-        
-        // Guardar la entidad con el ID existente (Spring Data JPA la actualizará si ya existe)
-        proyectoRepository.save(proyecto);
-
-        return "redirect:/proyectos/";
+     @PostMapping("/actualizar/{id}")
+    public String actualizarProyecto(@PathVariable Long id, @ModelAttribute Proyecto proyecto) {
+        proyectoService.actualizarProyecto(id, proyecto);
+        return "redirect:/usuarios/listar";
     }
+
 
 
     @GetMapping("/eliminar/{id}")

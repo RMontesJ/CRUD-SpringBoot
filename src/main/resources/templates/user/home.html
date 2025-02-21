@@ -12,8 +12,9 @@
     <div th:replace="~{layout/navbar :: navbar}"></div>
 	<h1>Bienvenido, Usuario</h1>
 	<p>Este es tu panel de usuario.</p>
-	<a href="/user/personas" class="btn btn-primary">Ver Lista de
-		Personas</a>
+	<a href="/listar" class="btn btn-primary">Ver Lista de usuarios</a>
+	<a href="/proyecto/leer" class="btn btn-primary mb-3">Ver Proyectos</a>
+	<a href="/tarea/leer" class="btn btn-primary mb-3">Ver Tareas</a>
 	<a href="/admin/dashboard" class="btn btn-primary">Dashboard admin</a>
 	<form th:action="@{/logout}" method="post">
 		<button type="submit" class="btn btn-danger">Cerrar Sesión</button>

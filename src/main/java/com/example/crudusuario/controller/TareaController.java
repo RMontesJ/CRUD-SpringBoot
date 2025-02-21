@@ -5,12 +5,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import com.example.crudusuario.model.Tarea;
 import com.example.crudusuario.repository.TareaRepository;
+import com.example.crudusuario.service.TareaService;
 
 @Controller
 @RequestMapping("/tareas")
 public class TareaController {
 
     private final TareaRepository tareaRepository;
+    private TareaService tareaService;
 
     public TareaController(TareaRepository tareaRepository) {
         this.tareaRepository = tareaRepository;
@@ -42,8 +44,7 @@ public class TareaController {
 
     @PostMapping("/actualizar/{id}")
     public String actualizar(@PathVariable Long id, @ModelAttribute Tarea tarea) {
-        tarea.setId(id);
-        tareaRepository.save(tarea);
+        tareaService.actualizarTarea(id, tarea); // Llamada a través de la instancia
         return "redirect:/tareas/";
     }
 
