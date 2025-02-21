@@ -1,54 +1,54 @@
 package com.example.crudusuario.controller;
 
-import com.example.crudusuario.model.Usuario;
-import com.example.crudusuario.repository.UsuarioRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import com.example.crudusuario.model.Usuario;
+import com.example.crudusuario.service.UsuarioService;
+import java.util.List;
 
 @Controller
+@RequestMapping("/usuarios")
 public class UsuarioController {
+    private final UsuarioService usuarioService;
 
-    private final UsuarioRepository usuarioRepository;
-
-    public UsuarioController(UsuarioRepository usuarioRepository) {
-        this.usuarioRepository = usuarioRepository;
+    public UsuarioController(UsuarioService usuarioService) {
+        this.usuarioService = usuarioService;
     }
 
-    @GetMapping("/")
-    public String listar(Model model) {
-        model.addAttribute("personas", usuarioRepository.findAll());
-        return "index";
+    @GetMapping("/registro")
+    public String mostrarFormularioRegistro(Model model) {
+        model.addAttribute("usuario", new Usuario());
+        return "user/registro";
     }
 
-    @GetMapping("/user/crear")
-    public String crearForm(Model model) {
-        model.addAttribute("persona", new Usuario());
-        return "/usuario/crear";
+    @PostMapping("/registro")
+    public String registrarUsuario(@ModelAttribute Usuario usuario) {
+        usuarioService.registrarUsuario(usuario);
+        return "redirect:/usuarios/listar";
     }
 
-    @PostMapping
-    public String guardar(@ModelAttribute Usuario persona) {
-    	usuarioRepository.save(persona);
-        return "redirect:/";
+    @GetMapping("/listar")
+    public String listarUsuarios(Model model) {
+        List<Usuario> usuarios = usuarioService.obtenerTodosLosUsuarios();
+        model.addAttribute("usuarios", usuarios);
+        return "user/listar";
     }
 
-    @GetMapping("/editar/{id}")
-    public String editarForm(@PathVariable Long id, Model model) {
-        model.addAttribute("persona", usuarioRepository.findById(id).orElseThrow());
-        return "editar";
-    }
-
-    @PostMapping("/{id}")
-    public String actualizar(@PathVariable Long id, @ModelAttribute Usuario persona) {
-        persona.setId(id);
-        usuarioRepository.save(persona);
-        return "redirect:/";
+    @PostMapping("/actualizar/{id}")
+    public String actualizarUsuario(@PathVariable Long id, @ModelAttribute Usuario usuario) {
+        usuarioService.actualizarUsuario(id, usuario);
+        return "redirect:/usuarios/listar";
     }
 
     @GetMapping("/eliminar/{id}")
-    public String eliminar(@PathVariable Long id) {
-    	usuarioRepository.deleteById(id);
-        return "redirect:/";
+    public String eliminarUsuario(@PathVariable Long id) {
+        usuarioService.eliminarUsuario(id);
+        return "redirect:/usuarios/listar";
+    }
+
+    @GetMapping("/home")
+    public String home(Model model) {
+        return "user/home";
     }
 }

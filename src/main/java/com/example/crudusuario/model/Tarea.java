@@ -1,78 +1,83 @@
 package com.example.crudusuario.model;
 
+import java.sql.Date;
+
 import jakarta.persistence.*;
-import java.util.Date;
 
 @Entity
-@Table(name = "tarea")
+@Table(name = "tareas")
 public class Tarea {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String titulo;
+    private String descripcion;
+    private Date fechaLimite;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @Enumerated(EnumType.STRING)
+    private EstadoTarea estado;
 
-	@Column(nullable = false)
-	private String titulo;
+    @ManyToOne
+    @JoinColumn(name = "proyecto_id", nullable = false)
+    private Proyecto proyecto;
 
-	@Column(nullable = false)
-	private String descripcion;
+    public Tarea() {}
 
-	@Column(name = "fecha_limite", nullable = false)
-	@Temporal(TemporalType.DATE)
-	private Date fechaLimite;
+    public Tarea(String titulo, String descripcion, Date fechaLimite, EstadoTarea estado, Proyecto proyecto) {
+        this.titulo = titulo;
+        this.descripcion = descripcion;
+        this.fechaLimite = fechaLimite;
+        this.estado = estado;
+        this.proyecto = proyecto;
+    }
 
-	@Column(nullable = false)
-	private String estado;
+    public Long getId() {
+        return id;
+    }
 
-	@ManyToOne
-	@JoinColumn(name = "proyecto_id", nullable = false)
-	private Proyecto proyecto;
+    public String getTitulo() {
+        return titulo;
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public String getDescripcion() {
+        return descripcion;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public Date getFechaLimite() {
+        return fechaLimite;
+    }
 
-	public String getTitulo() {
-		return titulo;
-	}
+    public EstadoTarea getEstado() {
+        return estado;
+    }
 
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
-	}
+    public Proyecto getProyecto() {
+        return proyecto;
+    }
 
-	public String getDescripcion() {
-		return descripcion;
-	}
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
 
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
 
-	public Date getFechaLimite() {
-		return fechaLimite;
-	}
+    public void setFechaLimite(Date fechaLimite) {
+        this.fechaLimite = fechaLimite;
+    }
 
-	public void setFechaLimite(Date fechaLimite) {
-		this.fechaLimite = fechaLimite;
-	}
+    public void setEstado(EstadoTarea estado) {
+        this.estado = estado;
+    }
 
-	public String getEstado() {
-		return estado;
-	}
+    public void setProyecto(Proyecto proyecto) {
+        this.proyecto = proyecto;
+    }
+}
 
-	public void setEstado(String estado) {
-		this.estado = estado;
-	}
-
-	public Proyecto getProyecto() {
-		return proyecto;
-	}
-
-	public void setProyecto(Proyecto proyecto) {
-		this.proyecto = proyecto;
-	}
+enum EstadoTarea {
+    PENDIENTE,
+    EN_CURSO,
+    COMPLETADA
 }

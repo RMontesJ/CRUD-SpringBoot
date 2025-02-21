@@ -1,12 +1,13 @@
 package com.example.crudusuario.repository;
 
-import java.util.Optional;
+import com.example.crudusuario.model.Usuario;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.example.crudusuario.model.Usuario;
-;
+import java.util.Optional;
 
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
     Optional<Usuario> findByUsername(String username);
+
+	public Usuario save(Usuario persona);
 }
