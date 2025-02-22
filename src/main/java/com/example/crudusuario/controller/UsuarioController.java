@@ -28,11 +28,18 @@ public String mostrarFormularioEdicion(@PathVariable Long id, Model model) {
         return "redirect:/user/listar";
     }
 
-    @PostMapping("/registro")
-    public String registrarUsuario(@ModelAttribute Usuario usuario) {
-        usuarioService.registrarUsuario(usuario);
-        return "redirect:/user/listar";
-    }
+    @GetMapping("/user/crear")
+public String mostrarFormularioCreacion(Model model) {
+    model.addAttribute("usuario", new Usuario());  // Crear un objeto usuario vacío
+    return "/user/crear"; // Esta es la vista donde el formulario de creación se mostrará
+}
+
+@PostMapping("/user/crear")
+public String registrarUsuario(@ModelAttribute Usuario usuario) {
+    usuarioService.registrarUsuario(usuario);
+    return "redirect:/user/listar";  // Redirige a la lista de usuarios después de crear el nuevo
+}
+
 
     @GetMapping("/user/listar")
     public String listarUsuarios(Model model) {
@@ -41,7 +48,7 @@ public String mostrarFormularioEdicion(@PathVariable Long id, Model model) {
         return "user/listar";
     }
 
-    @GetMapping("/eliminar/{id}")
+    @GetMapping("user/eliminar/{id}")
     public String eliminarUsuario(@PathVariable Long id) {
         usuarioService.eliminarUsuario(id);
         return "redirect:/user/listar";

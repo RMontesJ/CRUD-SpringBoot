@@ -18,17 +18,17 @@ public class Tarea {
     private EstadoTarea estado;
 
     @ManyToOne
-    @JoinColumn(name = "proyecto_id", nullable = false)
-    private Proyecto proyecto;
+    @JoinColumn(name = "usuario_id", nullable = false)
+    private Usuario usuario;
 
     public Tarea() {}
 
-    public Tarea(String titulo, String descripcion, Date fechaLimite, EstadoTarea estado, Proyecto proyecto) {
+    public Tarea(String titulo, String descripcion, Date fechaLimite, EstadoTarea estado, Usuario usuario) {
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.fechaLimite = fechaLimite;
         this.estado = estado;
-        this.proyecto = proyecto;
+        this.usuario = usuario;
     }
 
     public Long getId() {
@@ -51,8 +51,8 @@ public class Tarea {
         return estado;
     }
 
-    public Proyecto getProyecto() {
-        return proyecto;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
     public void setTitulo(String titulo) {
@@ -71,8 +71,8 @@ public class Tarea {
         this.estado = estado;
     }
 
-    public void setProyecto(Proyecto proyecto) {
-        this.proyecto = proyecto;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }
 
