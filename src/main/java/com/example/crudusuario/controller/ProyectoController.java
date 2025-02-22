@@ -5,7 +5,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.crudusuario.model.Proyecto;
-import com.example.crudusuario.model.Usuario;
 import com.example.crudusuario.repository.ProyectoRepository;
 import com.example.crudusuario.service.ProyectoService;
 

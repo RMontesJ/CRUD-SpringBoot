@@ -28,9 +28,9 @@
                     <td th:text="${usuario.username}"></td>
                     <td th:text="${usuario.role}"></td>
                     <td>
-                        <a th:href="@{/admin/user/editar/{id}(id=${usuario.id})}" 
+                        <a th:href="@{/user/editar/{id}(id=${usuario.id})}" 
                            class="btn btn-warning">Editar</a>
-                        <a th:href="@{/admin/user/eliminar/{id}(id=${usuario.id})}" 
+                        <a th:href="@{/user/eliminar/{id}(id=${usuario.id})}" 
                            class="btn btn-danger"
                            onclick="return confirm('¿Estás seguro de eliminar esta persona?');">
                            Eliminar

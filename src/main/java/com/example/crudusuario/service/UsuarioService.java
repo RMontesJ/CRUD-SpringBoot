@@ -64,6 +64,12 @@ public class UsuarioService implements UserDetailsService{
         }
         usuarioRepository.deleteById(id);
     }
+
+    public Usuario obtenerUsuarioPorId(Long id) {
+        return usuarioRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Usuario no encontrado con el id: " + id));
+    }
+    
     
 }
 

@@ -15,10 +15,17 @@ public class UsuarioController {
         this.usuarioService = usuarioService;
     }
 
-    @GetMapping("/registro")
-    public String mostrarFormularioRegistro(Model model) {
-        model.addAttribute("usuario", new Usuario());
-        return "user/registro";
+    @GetMapping("/user/editar/{id}")
+public String mostrarFormularioEdicion(@PathVariable Long id, Model model) {
+    Usuario usuario = usuarioService.obtenerUsuarioPorId(id);
+    model.addAttribute("usuario", usuario);
+    return "user/editar"; // Esta es la vista donde el formulario de edición se mostrará
+}
+
+@PostMapping("/user/editar/{id}")
+    public String actualizarUsuario(@PathVariable Long id, @ModelAttribute Usuario usuario) {
+        usuarioService.actualizarUsuario(id, usuario);
+        return "redirect:/user/listar";
     }
 
     @PostMapping("/registro")
@@ -32,12 +39,6 @@ public class UsuarioController {
         List<Usuario> usuarios = usuarioService.obtenerTodosLosUsuarios();
         model.addAttribute("usuarios", usuarios);
         return "user/listar";
-    }
-
-    @PostMapping("/actualizar/{id}")
-    public String actualizarUsuario(@PathVariable Long id, @ModelAttribute Usuario usuario) {
-        usuarioService.actualizarUsuario(id, usuario);
-        return "redirect:/user/listar";
     }
 
     @GetMapping("/eliminar/{id}")
