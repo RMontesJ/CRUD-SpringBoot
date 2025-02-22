@@ -18,8 +18,12 @@ public class Tarea {
     private EstadoTarea estado;
 
     @ManyToOne
-    @JoinColumn(name = "usuario_id", nullable = false)
+    @JoinColumn(name = "id_usuario", nullable = false)
     private Usuario usuario;
+
+    // Nuevo campo para almacenar el ID del usuario directamente
+    @Column(name = "id_usuario", insertable = false, updatable = false)
+    private Long idUsuario;
 
     public Tarea() {}
 
@@ -29,6 +33,7 @@ public class Tarea {
         this.fechaLimite = fechaLimite;
         this.estado = estado;
         this.usuario = usuario;
+        this.idUsuario = usuario != null ? usuario.getId() : null; // Asignar idUsuario a partir del usuario
     }
 
     public Long getId() {
@@ -55,6 +60,10 @@ public class Tarea {
         return usuario;
     }
 
+    public Long getIdUsuario() {
+        return idUsuario;
+    }
+
     public void setTitulo(String titulo) {
         this.titulo = titulo;
     }
@@ -73,6 +82,11 @@ public class Tarea {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+        this.idUsuario = usuario != null ? usuario.getId() : null; // Actualizar el idUsuario cuando se cambia el usuario
+    }
+
+    public void setIdUsuario(Long idUsuario) {
+        this.idUsuario = idUsuario;
     }
 }
 

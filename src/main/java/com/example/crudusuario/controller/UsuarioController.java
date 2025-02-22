@@ -15,19 +15,6 @@ public class UsuarioController {
         this.usuarioService = usuarioService;
     }
 
-    @GetMapping("/user/editar/{id}")
-public String mostrarFormularioEdicion(@PathVariable Long id, Model model) {
-    Usuario usuario = usuarioService.obtenerUsuarioPorId(id);
-    model.addAttribute("usuario", usuario);
-    return "user/editar"; // Esta es la vista donde el formulario de edición se mostrará
-}
-
-@PostMapping("/user/editar/{id}")
-    public String actualizarUsuario(@PathVariable Long id, @ModelAttribute Usuario usuario) {
-        usuarioService.actualizarUsuario(id, usuario);
-        return "redirect:/user/listar";
-    }
-
     @GetMapping("/user/crear")
 public String mostrarFormularioCreacion(Model model) {
     model.addAttribute("usuario", new Usuario());  // Crear un objeto usuario vacío
@@ -39,6 +26,19 @@ public String registrarUsuario(@ModelAttribute Usuario usuario) {
     usuarioService.registrarUsuario(usuario);
     return "redirect:/user/listar";  // Redirige a la lista de usuarios después de crear el nuevo
 }
+
+@GetMapping("/user/editar/{id}")
+public String mostrarFormularioEdicion(@PathVariable Long id, Model model) {
+    Usuario usuario = usuarioService.obtenerUsuarioPorId(id);
+    model.addAttribute("usuario", usuario);
+    return "user/editar"; // Esta es la vista donde el formulario de edición se mostrará
+}
+
+@PostMapping("/user/editar/{id}")
+    public String actualizarUsuario(@PathVariable Long id, @ModelAttribute Usuario usuario) {
+        usuarioService.actualizarUsuario(id, usuario);
+        return "redirect:/user/listar";
+    }
 
 
     @GetMapping("/user/listar")

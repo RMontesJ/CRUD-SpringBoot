@@ -1,56 +1,59 @@
 package com.example.crudusuario.controller;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import com.example.crudusuario.model.Tarea;
-import com.example.crudusuario.repository.TareaRepository;
 import com.example.crudusuario.service.TareaService;
 
 @Controller
-@RequestMapping("/tareas")
 public class TareaController {
 
-    private final TareaRepository tareaRepository;
-    private TareaService tareaService;
+    private final TareaService tareaService;
 
-    public TareaController(TareaRepository tareaRepository) {
-        this.tareaRepository = tareaRepository;
+    public TareaController(TareaService tareaService) {
+        this.tareaService = tareaService;
     }
 
-    @GetMapping("/")
-    public String listar(Model model) {
-        model.addAttribute("tareas", tareaRepository.findAll());
-        return "index";
+    @GetMapping("/tarea/crear")
+    public String mostrarFormularioCreacion(Model model) {
+        model.addAttribute("tarea", new Tarea());  // Crear un objeto usuario vacío
+        return "/tarea/crear"; // Esta es la vista donde el formulario de creación se mostrará
     }
 
-    @GetMapping("/crear")
-    public String crearForm(Model model) {
-        model.addAttribute("tarea", new Tarea());
-        return "tarea/crear";
+
+    @PostMapping("/tarea/crear")
+    public String registrarTarea(@ModelAttribute Tarea tarea) {
+    tareaService.registrarTarea(tarea);
+    return "redirect:/user/listar";  // Redirige a la lista de usuarios después de crear el nuevo
+}
+
+
+@GetMapping("/tarea/editar/{id}")
+public String mostrarFormularioEdicion(@PathVariable Long id, Model model) {
+    Tarea tarea = tareaService.obtenerTareaPorId(id);
+    model.addAttribute("tarea", tarea);
+    return "tarea/editar"; // Esta es la vista donde el formulario de edición se mostrará
+}
+
+@PostMapping("/tarea/editar/{id}")
+    public String actualizarTarea(@PathVariable Long id, @ModelAttribute Tarea tarea) {
+        tareaService.actualizarTarea(id, tarea);
+        return "redirect:/tarea/listar";
     }
 
-    @PostMapping("/guardar")
-    public String guardar(@ModelAttribute Tarea tarea) {
-        tareaRepository.save(tarea);
-        return "redirect:/tareas/";
+    @GetMapping("/tarea/listar")
+    public String listarTareas(Model model) {
+        List<Tarea> tareas = tareaService.obtenerTodasLasTareas();
+        model.addAttribute("tareas", tareas);
+        return "tarea/listar";
     }
 
-    @GetMapping("/editar/{id}")
-    public String editarForm(@PathVariable Long id, Model model) {
-        model.addAttribute("tarea", tareaRepository.findById(id).orElseThrow());
-        return "tarea/editar";
-    }
-
-    @PostMapping("/actualizar/{id}")
-    public String actualizar(@PathVariable Long id, @ModelAttribute Tarea tarea) {
-        tareaService.actualizarTarea(id, tarea); // Llamada a través de la instancia
-        return "redirect:/tareas/";
-    }
-
-    @GetMapping("/eliminar/{id}")
-    public String eliminar(@PathVariable Long id) {
-        tareaRepository.deleteById(id);
-        return "redirect:/tareas/";
+    @GetMapping("tarea/eliminar/{id}")
+    public String eliminarTarea(@PathVariable Long id) {
+        tareaService.eliminarTarea(id);
+        return "redirect:/tarea/listar";
     }
 }

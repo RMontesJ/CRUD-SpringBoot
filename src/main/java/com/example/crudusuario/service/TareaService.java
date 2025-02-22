@@ -2,6 +2,8 @@ package com.example.crudusuario.service;
 
 import com.example.crudusuario.repository.TareaRepository;
 import com.example.crudusuario.model.Tarea;
+import com.example.crudusuario.model.Usuario;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,7 +19,7 @@ public class TareaService {
     }
 
     // Method to create a new Tarea
-    public Tarea crearTarea(Tarea tarea) {
+    public Tarea registrarTarea(Tarea tarea) {
         return tareaRepository.save(tarea);
     }
 
@@ -27,14 +29,14 @@ public class TareaService {
     }
 
     // Method to update an existing Tarea
-    public Tarea actualizarTarea(Long id, Tarea tareaActualizada) {
+    public Tarea actualizarTarea(Long id, Tarea tarea) {
         return tareaRepository.findById(id)
-            .map(tarea -> {
-                tarea.setTitulo(tareaActualizada.getTitulo());
-                tarea.setDescripcion(tareaActualizada.getDescripcion());
-                tarea.setFechaLimite(tareaActualizada.getFechaLimite());
-                tarea.setEstado(tareaActualizada.getEstado());
-                tarea.setUsuario(tareaActualizada.getUsuario());
+            .map(tareas -> {
+                tarea.setTitulo(tarea.getTitulo());
+                tarea.setDescripcion(tarea.getDescripcion());
+                tarea.setFechaLimite(tarea.getFechaLimite());
+                tarea.setEstado(tarea.getEstado());
+                tarea.setUsuario(tarea.getUsuario());
                 return tareaRepository.save(tarea); // Save the updated tarea
             })
             .orElseThrow(() -> new RuntimeException("Tarea no encontrada"));
@@ -49,7 +51,8 @@ public class TareaService {
     }
 
     // Method to find a Tarea by its ID
-    public Optional<Tarea> obtenerTareaPorId(Long id) {
-        return tareaRepository.findById(id);
+    public Tarea obtenerTareaPorId(Long id) {
+        return tareaRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Usuario no encontrado con el id: " + id));
     }
 }
