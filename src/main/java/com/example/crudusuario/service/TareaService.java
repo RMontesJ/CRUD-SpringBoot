@@ -36,7 +36,7 @@ public class TareaService {
                 tarea.setDescripcion(tarea.getDescripcion());
                 tarea.setFechaLimite(tarea.getFechaLimite());
                 tarea.setEstado(tarea.getEstado());
-                tarea.setUsuario(tarea.getUsuario());
+                tarea.setIdUsuario(tarea.getIdUsuario());
                 return tareaRepository.save(tarea); // Save the updated tarea
             })
             .orElseThrow(() -> new RuntimeException("Tarea no encontrada"));

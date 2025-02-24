@@ -1,92 +1,102 @@
 package com.example.crudusuario.model;
 
-import java.sql.Date;
+import java.time.LocalDateTime;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 
 @Entity
 @Table(name = "tareas")
 public class Tarea {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false)
     private String titulo;
+
+    @Column
     private String descripcion;
-    private Date fechaLimite;
+
+    @Temporal(TemporalType.DATE)
+    @Column(name = "fecha_limite")
+    private String fecha_limite;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private EstadoTarea estado;
 
-    @ManyToOne
-    @JoinColumn(name = "id_usuario", nullable = false)
-    private Usuario usuario;
+    @Column(name = "id_usuario", nullable = false)
+    private Long id_usuario;
 
-    // Nuevo campo para almacenar el ID del usuario directamente
-    @Column(name = "id_usuario", insertable = false, updatable = false)
-    private Long idUsuario;
-
+    // Constructor vacío
     public Tarea() {}
 
-    public Tarea(String titulo, String descripcion, Date fechaLimite, EstadoTarea estado, Usuario usuario) {
+    // Constructor con parámetros
+    public Tarea(String titulo, String descripcion, String fecha_limite, EstadoTarea estado, Long id_usuario) {
         this.titulo = titulo;
         this.descripcion = descripcion;
-        this.fechaLimite = fechaLimite;
+        this.fecha_limite = fecha_limite;
         this.estado = estado;
-        this.usuario = usuario;
-        this.idUsuario = usuario != null ? usuario.getId() : null; // Asignar idUsuario a partir del usuario
+        this.id_usuario = id_usuario;
     }
 
+    // Getters y setters
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getTitulo() {
         return titulo;
     }
 
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public Date getFechaLimite() {
-        return fechaLimite;
-    }
-
-    public EstadoTarea getEstado() {
-        return estado;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public Long getIdUsuario() {
-        return idUsuario;
-    }
-
     public void setTitulo(String titulo) {
         this.titulo = titulo;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
     }
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
 
-    public void setFechaLimite(Date fechaLimite) {
-        this.fechaLimite = fechaLimite;
+    public String getFechaLimite() {
+        return fecha_limite;
+    }
+
+    public void setFechaLimite(String fecha_limite) {
+        this.fecha_limite = fecha_limite;
+    }
+
+    public EstadoTarea getEstado() {
+        return estado;
     }
 
     public void setEstado(EstadoTarea estado) {
         this.estado = estado;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-        this.idUsuario = usuario != null ? usuario.getId() : null; // Actualizar el idUsuario cuando se cambia el usuario
+    public Long getIdUsuario() {
+        return id_usuario;
     }
 
-    public void setIdUsuario(Long idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setIdUsuario(Long id_usuario) {
+        this.id_usuario = id_usuario;
     }
 }
 
