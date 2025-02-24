@@ -1,7 +1,5 @@
 package com.example.crudusuario.model;
 
-import java.time.LocalDateTime;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -29,7 +27,7 @@ public class Tarea {
 
     @Temporal(TemporalType.DATE)
     @Column(name = "fecha_limite")
-    private String fecha_limite;
+    private String fechaLimite;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -42,10 +40,10 @@ public class Tarea {
     public Tarea() {}
 
     // Constructor con parámetros
-    public Tarea(String titulo, String descripcion, String fecha_limite, EstadoTarea estado, Long id_usuario) {
+    public Tarea(String titulo, String descripcion, String fechaLimite, EstadoTarea estado, Long id_usuario) {
         this.titulo = titulo;
         this.descripcion = descripcion;
-        this.fecha_limite = fecha_limite;
+        this.fechaLimite = fechaLimite;
         this.estado = estado;
         this.id_usuario = id_usuario;
     }
@@ -76,11 +74,11 @@ public class Tarea {
     }
 
     public String getFechaLimite() {
-        return fecha_limite;
+        return fechaLimite;
     }
 
-    public void setFechaLimite(String fecha_limite) {
-        this.fecha_limite = fecha_limite;
+    public void setFechaLimite(String fechaLimite) {
+        this.fechaLimite = fechaLimite;
     }
 
     public EstadoTarea getEstado() {
