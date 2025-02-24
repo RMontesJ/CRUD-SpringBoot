@@ -25,7 +25,6 @@ public class Tarea {
     @Column
     private String descripcion;
 
-    @Temporal(TemporalType.DATE)
     @Column(name = "fecha_limite")
     private String fechaLimite;
 

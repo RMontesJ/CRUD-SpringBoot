@@ -25,7 +25,7 @@
 
             <div class="mb-3">
                 <label for="fecha_limite" class="form-label">Fecha Límite</label>
-                <input type="text" th:field="*{fecha_limite}">
+                <input type="text" id="fecha" class="form-control" th:field="*{fechaLimite}">
             </div>
 
             <div class="mb-3">
@@ -39,7 +39,7 @@
 
             <div class="mb-3">
                 <label for="id_usuario" class="form-label">ID Usuario</label>
-                <input type="number" th:field="*{id_usuario}" placeholder="ID del Usuario" required>
+                <input type="number" id="id_usuario" class="form-control" th:field="*{id_usuario}" placeholder="ID del Usuario" required>
             </div>
 
             <button type="submit" class="btn btn-primary">Guardar</button>
