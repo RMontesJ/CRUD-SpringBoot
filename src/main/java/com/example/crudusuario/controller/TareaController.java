@@ -37,7 +37,7 @@ public class TareaController {
     @PostMapping("/tarea/crear")
     public String registrarTarea(@ModelAttribute Tarea tarea) {
     tareaService.registrarTarea(tarea);
-    return "redirect:/user/listar";  // Redirige a la lista de usuarios después de crear el nuevo
+    return "redirect:/tarea/listar";  // Redirige a la lista de usuarios después de crear el nuevo
 }
 
 
