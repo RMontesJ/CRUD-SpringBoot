@@ -9,7 +9,6 @@
 <body>
     <!-- Incluir la barra de navegación -->
     <div th:replace="~{layout/navbar :: navbar}"></div>
-
     <div class="container mt-4">
         <h1>Crear Tarea</h1>
         <form th:action="@{/tarea/crear}" th:object="${tarea}" method="post">
@@ -17,17 +16,14 @@
                 <label for="titulo" class="form-label">Título</label>
                 <input type="text" th:field="*{titulo}" placeholder="Título de la tarea" required>
             </div>
-
             <div class="mb-3">
                 <label for="descripcion" class="form-label">Descripción</label>
                 <textarea th:field="*{descripcion}" placeholder="Descripción de la tarea"></textarea>
             </div>
-
             <div class="mb-3">
-                <label for="fecha_limite" class="form-label">Fecha Límite</label>
-                <input type="text" id="fecha" class="form-control" th:field="*{fechaLimite}">
+                <label for="fechaLimite" class="form-label">Fecha Límite</label>
+                <input type="text" th:field="*{fechaLimite}">
             </div>
-
             <div class="mb-3">
                 <label for="estado" class="form-label">Estado</label>
                 <select th:field="*{estado}" required>
@@ -36,12 +32,10 @@
                     <option value="COMPLETADA">Completada</option>
                 </select>
             </div>
-
             <div class="mb-3">
-                <label for="id_usuario" class="form-label">ID Usuario</label>
-                <input type="number" id="id_usuario" class="form-control" th:field="*{id_usuario}" placeholder="ID del Usuario" required>
+                <label for="id" class="form-label">ID Usuario</label>
+                <input type="number" th:field="*{idUsuario}" placeholder="ID del Usuario" required>
             </div>
-
             <button type="submit" class="btn btn-primary">Guardar</button>
             <a href="/tarea/listar" class="btn btn-secondary">Cancelar</a>
         </form>

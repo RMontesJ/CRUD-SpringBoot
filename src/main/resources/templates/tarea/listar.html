@@ -29,9 +29,9 @@
 	            <td th:text="${tarea.id}"></td>
 	            <td th:text="${tarea.titulo}"></td>
 	            <td th:text="${tarea.descripcion}"></td>
-	            <td th:text="${tarea.fecha_limite}"></td>
+	            <td th:text="${tarea.fechaLimite}"></td>
 	            <td th:text="${tarea.estado}"></td>
-	            <td th:text="${tarea.id_usuario}"></td>
+	            <td th:text="${tarea.idUsuario}"></td>
 	            <td>
 	                <a th:href="@{/tarea/editar/{id}(id=${tarea.id})}" class="btn btn-warning">Editar</a>
 	                <a th:href="@{/tarea/crear/}" class="btn btn-warning">Crear</a>

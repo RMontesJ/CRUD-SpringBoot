@@ -12,7 +12,7 @@
 <body>
 <div class="container mt-4">
     <h1>Editar Tarea</h1>
-    <form th:action="@{/tareas/{id}(id=${tarea.id})}" th:object="${tarea}" method="post">
+    <form th:action="@{/tarea/editar/{id}(id=${tarea.id})}" th:object="${tarea}" method="post">
         <div class="mb-3">
             <label for="titulo" class="form-label">Título</label>
             <input type="text" id="titulo" th:field="*{titulo}" class="form-control" required>
@@ -23,7 +23,7 @@
         </div>
         <div class="mb-3">
             <label for="fecha_limite" class="form-label">Fecha Límite</label>
-            <input type="date" id="fecha_limite" th:field="*{fecha_limite}" class="form-control">
+            <input type="date" id="fechaLimite" th:field="*{fechaLimite}" class="form-control">
         </div>
         <div class="mb-3">
             <label for="estado" class="form-label">Estado</label>
@@ -31,12 +31,6 @@
                 <option value="Pendiente">Pendiente</option>
                 <option value="En Curso">En Curso</option>
                 <option value="Completada">Completada</option>
-            </select>
-        </div>
-        <div class="mb-3">
-            <label for="proyecto_id" class="form-label">Proyecto</label>
-            <select id="proyecto_id" th:field="*{proyecto_id}" class="form-control" required>
-                <option th:each="proyecto : ${proyectos}" th:value="${proyecto.id}" th:text="${proyecto.nombre}"></option>
             </select>
         </div>
         <button type="submit" class="btn btn-primary">Actualizar</button>

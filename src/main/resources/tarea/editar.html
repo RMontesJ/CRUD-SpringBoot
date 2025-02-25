@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <h2>Editar Tarea</h2>
+    <form th:action="@{/admin/tareas/actualizar/{id}(id=${tarea.id})}" 
+          th:object="${tarea}" method="post">
+        <div class="mb-3">
+            <label for="titulo" class="form-label">Título</label>
+            <input type="text" id="titulo" th:field="*{titulo}" class="form-control" placeholder="Título" required>
+        </div>
+        <div class="mb-3">
+            <label for="descripcion" class="form-label">Descripción</label>
+            <textarea id="descripcion" th:field="*{descripcion}" class="form-control" placeholder="Descripción" required></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="fecha" class="form-label">Fecha Límite</label>
+            <input type="date" id="fecha" th:field="*{fechaLimite}" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Actualizar Tarea</button>
+    </form>
+
+</body>
+</html>

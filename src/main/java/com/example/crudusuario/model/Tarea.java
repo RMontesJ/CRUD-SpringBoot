@@ -25,6 +25,7 @@ public class Tarea {
     @Column
     private String descripcion;
 
+
     @Column(name = "fecha_limite")
     private String fechaLimite;
 
@@ -33,7 +34,7 @@ public class Tarea {
     private EstadoTarea estado;
 
     @Column(name = "id_usuario", nullable = false)
-    private Long id_usuario;
+    private Long idUsuario;
 
     // Constructor vacío
     public Tarea() {}
@@ -44,7 +45,7 @@ public class Tarea {
         this.descripcion = descripcion;
         this.fechaLimite = fechaLimite;
         this.estado = estado;
-        this.id_usuario = id_usuario;
+        this.idUsuario = id_usuario;
     }
 
     // Getters y setters
@@ -88,13 +89,13 @@ public class Tarea {
         this.estado = estado;
     }
 
-    public Long getIdUsuario() {
-        return id_usuario;
-    }
+	public Long getIdUsuario() {
+		return idUsuario;
+	}
 
-    public void setIdUsuario(Long id_usuario) {
-        this.id_usuario = id_usuario;
-    }
+	public void setIdUsuario(Long idUsuario) {
+		this.idUsuario = idUsuario;
+	}
 }
 
 enum EstadoTarea {
