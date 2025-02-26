@@ -28,11 +28,17 @@
         <div class="mb-3">
             <label for="estado" class="form-label">Estado</label>
             <select id="estado" th:field="*{estado}" class="form-control" required>
-                <option value="Pendiente">Pendiente</option>
-                <option value="En Curso">En Curso</option>
-                <option value="Completada">Completada</option>
+                <option value="PENDIENTE">PENDIENTE</option>
+                <option value="EN_CURSO">EN_CURSO</option>
+                <option value="COMPLETADA">COMPLETADA</option>
             </select>
         </div>
+
+        <div class="mb-3">
+            <label for="id" class="form-label">ID Usuario</label>
+            <input type="number" th:field="*{idUsuario}" placeholder="ID del Usuario" required>
+        </div>
+        
         <button type="submit" class="btn btn-primary">Actualizar</button>
         <a href="/tareas" class="btn btn-secondary">Cancelar</a>
     </form>
