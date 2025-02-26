@@ -34,7 +34,6 @@
 	            <td th:text="${tarea.idUsuario}"></td>
 	            <td>
 	                <a th:href="@{/tarea/editar/{id}(id=${tarea.id})}" class="btn btn-warning">Editar</a>
-	                <a th:href="@{/tarea/crear/}" class="btn btn-warning">Crear</a>
 	                <a th:href="@{/tarea/eliminar/{id}(id=${tarea.id})}" class="btn btn-danger"
 	                   onclick="return confirm('¿Estás seguro de que quieres eliminar esta tarea?');">Eliminar</a>
 	            </td>
